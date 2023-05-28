@@ -68,7 +68,13 @@ public class MainActivity extends AppCompatActivity {
                 second = 0;
                 break;
             case R.id.btn_plus_minus:
-                textView.setText("-" + textView.getText());
+                Double num = Double.parseDouble(textView.getText().toString());
+                if (num % 1 == 0){
+                    int numInt = (int) Math.round(num);
+                    textView.setText(String.valueOf(-numInt));
+                }else {
+                    textView.setText(String.valueOf(-num));
+                }
                 break;
             case R.id.btn_percent:
                 operation = "%";
@@ -123,10 +129,10 @@ public class MainActivity extends AppCompatActivity {
                         result = Math.abs(first) * (Math.abs(second) / 100);
                         break;
                 }
-                if(result % 1 == 0){
+                if (result % 1 == 0) {
                     int resultInt = (int) Math.round(result);
                     textView.setText(String.valueOf(resultInt));
-                }else {
+                } else {
                     textView.setText(result.toString());
                 }
                 isOperationClick = true;
