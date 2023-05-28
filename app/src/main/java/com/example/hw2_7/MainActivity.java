@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 setNumber("0");
                 break;
             case R.id.btn_dot:
-                setNumber(".");
+                if (!isHesDot(textView.getText().toString()))
+                    setNumber(".");
                 break;
         }
     }
@@ -69,11 +70,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_plus_minus:
                 Double num = Double.parseDouble(textView.getText().toString());
-                if (num % 1 == 0){
-                    int numInt = (int) Math.round(num);
-                    textView.setText(String.valueOf(-numInt));
-                }else {
-                    textView.setText(String.valueOf(-num));
+                if(num != 0) {
+                    if (num % 1 == 0) {
+                        int numInt = (int) Math.round(num);
+                        textView.setText(String.valueOf(-numInt));
+                    } else {
+                        textView.setText(String.valueOf(-num));
+                    }
                 }
                 break;
             case R.id.btn_percent:
@@ -149,6 +152,11 @@ public class MainActivity extends AppCompatActivity {
             textView.append(string);
         }
         isOperationClick = false;
+    }
+
+    public boolean isHesDot(String string) {
+        if (string.indexOf(".") == -1) return false;
+        else return true;
     }
 
 }
